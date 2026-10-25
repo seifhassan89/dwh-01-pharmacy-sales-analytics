@@ -1,0 +1,37 @@
+<mxfile host="65bd71144e">
+    <diagram id="data_architecture" name="data_architecture">
+        <mxGraphModel dx="776" dy="824" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="950" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="source" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="OnlinePharmacyDB&lt;br&gt;Orders • OrderItems • Pharmacies • OrderStateTypes" vertex="1">
+                    <mxGeometry height="96" width="265" x="50" y="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="stage" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#888888;fontSize=13;" value="Staging (stg schema)&lt;br&gt;Full source snapshot" vertex="1">
+                    <mxGeometry height="96" width="250" x="420" y="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="quality" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#888888;fontSize=13;" value="Validation&lt;div&gt;Keys • Orphans • Amounts&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="96" width="245" x="780" y="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="dwh" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" value="Kimball Dimensional DWH (dbo)&lt;div&gt;DimDate • DimPharmacy • DimOrderStatus (lookup)&lt;/div&gt;&lt;div&gt;FactWeeklyPharmacySales&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="116" width="365" x="1120" y="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="view" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" value="Semantic View&lt;div&gt;vw_WeeklyPharmacySales&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="80" width="325" x="1140" y="420" as="geometry"/>
+                </mxCell>
+                <mxCell id="e0" edge="1" parent="1" source="source" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;" target="stage" value="Extract">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e1" edge="1" parent="1" source="stage" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;" target="quality" value="Validate">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e2" edge="1" parent="1" source="quality" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;" target="dwh" value="Load">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e3" edge="1" parent="1" source="dwh" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;" target="view" value="Query">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

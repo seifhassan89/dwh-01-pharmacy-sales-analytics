@@ -1,0 +1,55 @@
+<mxfile host="65bd71144e">
+    <diagram id="data_flow" name="data_flow">
+        <mxGraphModel dx="451" dy="479" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="950" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="orders" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="Orders&lt;div&gt;Id • PharmacyKey • Status • CreatedOn&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="75" width="280" x="50" y="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="items" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="OrderItems&lt;div&gt;OrderId • Price • Quantity&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="75" width="280" x="50" y="245" as="geometry"/>
+                </mxCell>
+                <mxCell id="pharm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="Pharmacies&lt;div&gt;Id • Key • TestFlag&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="75" width="280" x="50" y="380" as="geometry"/>
+                </mxCell>
+                <mxCell id="status" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="OrderStateTypes&lt;div&gt;OrderStateTypeId • StateName&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="75" width="280" x="50" y="515" as="geometry"/>
+                </mxCell>
+                <mxCell id="stg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#888888;fontSize=13;" value="stg.* snapshot tables&lt;div&gt;Preserve source identifiers&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="110" width="260" x="440" y="255" as="geometry"/>
+                </mxCell>
+                <mxCell id="checks" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#888888;fontSize=13;" value="Validation&lt;div&gt;unique keys • references • amounts&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="110" width="250" x="745" y="255" as="geometry"/>
+                </mxCell>
+                <mxCell id="agg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" value="Weekly aggregate&lt;div&gt;Monday(Orders.CreatedOn)&lt;/div&gt;&lt;div&gt;Delivered only; SUM(Price × Qty)&lt;/div&gt;&lt;div&gt;COUNT DISTINCT OrderId&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="135" width="340" x="1055" y="242.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="fact" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" value="FactWeeklyPharmacySales&lt;div&gt;pharmacy + week&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="88" width="290" x="1080" y="510" as="geometry"/>
+                </mxCell>
+                <mxCell id="e0" edge="1" parent="1" source="orders" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;" target="stg" value="">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e1" edge="1" parent="1" source="items" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;" target="stg" value="">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e2" edge="1" parent="1" source="pharm" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;" target="stg" value="">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e3" edge="1" parent="1" source="status" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;" target="stg" value="">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e4" edge="1" parent="1" source="stg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;" target="checks" value="">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e5" edge="1" parent="1" source="checks" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;" target="agg" value="">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e6" edge="1" parent="1" source="agg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;" target="fact" value="">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

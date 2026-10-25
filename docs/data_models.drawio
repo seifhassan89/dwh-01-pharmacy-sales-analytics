@@ -1,0 +1,28 @@
+<mxfile host="65bd71144e">
+    <diagram id="data_models" name="data_models">
+        <mxGraphModel dx="394" dy="418" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="950" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="date" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" value="DimDate&lt;div&gt;PK DateKey INT&lt;/div&gt;&lt;div&gt;FullDate DATE UNIQUE&lt;/div&gt;&lt;div&gt;WeekOfYear • Month • Year&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="145" width="325" x="65" y="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="pharm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" value="DimPharmacy&lt;div&gt;PK PharmacyKey INT&lt;/div&gt;&lt;div&gt;PharmacyBisKey UNIQUE&lt;/div&gt;&lt;div&gt;CreatedOn • TestFlag&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="145" width="325" x="65" y="400" as="geometry"/>
+                </mxCell>
+                <mxCell id="fact" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" value="FactWeeklyPharmacySales&lt;div&gt;PK/FK WeekStartDateKey INT&lt;/div&gt;&lt;div&gt;PK/FK PharmacyKey INT&lt;/div&gt;&lt;div&gt;TotalOrders INT&lt;/div&gt;&lt;div&gt;TotalSales DECIMAL(38,2)&lt;/div&gt;&lt;div&gt;GRAIN: Pharmacy × Monday week&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="225" width="430" x="555" y="245" as="geometry"/>
+                </mxCell>
+                <mxCell id="status" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#aaaaaa;dashed=1;fontSize=12;" value="DimOrderStatus&lt;div&gt;OrderStateTypeId UNIQUE&lt;/div&gt;&lt;div&gt;StateName: Delivered filter&lt;/div&gt;&lt;div&gt;ETL lookup only — NO fact FK&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="165" width="310" x="1100" y="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="e0" edge="1" parent="1" source="date" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;" target="fact" value="DateKey → WeekStartDateKey">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e1" edge="1" parent="1" source="pharm" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;" target="fact" value="PharmacyKey → PharmacyKey">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
